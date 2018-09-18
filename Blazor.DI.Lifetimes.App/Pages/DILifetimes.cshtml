@@ -1,0 +1,40 @@
+﻿@page "/dilifetimes"
+@using Blazor.DI.Lifetimes.App.Services
+@inject SingletonService singletonService
+@inject ScopedService scopedService
+@inject TransientService transientService
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Lifetime Type</td>
+            <td>Count</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Singleton</td>
+            <td>@singletonService.Counter</td>
+        </tr>
+        <tr>
+            <td>Scoped</td>
+            <td>@scopedService.Counter</td>
+        </tr>
+        <tr>
+            <td>Transient</td>
+            <td>@transientService.Counter</td>
+        </tr>
+    </tbody>
+</table>
+
+@functions
+{
+    protected override void OnInit()
+    {
+        singletonService.Counter++;
+        scopedService.Counter++;
+        transientService.Counter++;
+
+        base.OnInit();
+    }
+}
